@@ -10,11 +10,13 @@ import User from '../mongodb/models/User.js';
 dotenv.config();
 
 //CRUD operations
-const getAllItems = (req, res) => {};
-const getItemDetails = (req, res) => {};
-const createItem = (req, res) => {};
-const updateItem = (req, res) => {};
-const deleteItem = (req, res) => {};
+const getAllItems = async (req, res) => {
+  
+};
+const getItemDetails = async (req, res) => {};
+const createItem = async (req, res) => {};
+const updateItem = async (req, res) => {};
+const deleteItem = async (req, res) => {};
 
 export {
   getAllItems,
