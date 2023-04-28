@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useSignup } from '../hooks/useSignup';
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -7,6 +9,7 @@ const Signup = () => {
     password: '',
     avatar: ''
   });
+  const { signup, isLoading, error } = useSignup();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +22,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData.name, formData.email, formData.password, formData.avatar);
+    await signup(formData.name, formData.email, formData.password, formData.avatar);
 
     setFormData({
       name: '',
@@ -49,8 +52,9 @@ const Signup = () => {
           Avatar:
           <input type='file' name='avatar' value={formData.avatar} onChange={handleChange} />
         </label>
-        <button type="submit">Sign Up</button>
+        <button disabled={isLoading} type="submit">Sign Up</button>
       </form>
+      {error && <div>{error}</div>}
     </div>
   )
 }

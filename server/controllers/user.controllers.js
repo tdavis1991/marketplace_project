@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import isEmail from 'validator/lib/isEmail.js';
 import isStrongPassword from 'validator/lib/isStrongPassword.js';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 
 import User from '../mongodb/models/User.js';
@@ -80,7 +80,7 @@ const signupUser = async (req, res) => {
 
     const token = createToken(user._id);
     
-    res.status(200).json({ message: 'User signed in!', email, token });
+    res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ message: error.message })
   }
