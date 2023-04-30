@@ -27,13 +27,18 @@ const getAllItems = async (req, res) => {
   }
 };
 const getItemDetails = async (req, res) => {};
+
 const createItem = async (req, res) => {
   try {
-    const { title, description, price, category, photo } = req.body;
+    const { title, description, price, category, photo, email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if(!user) throw new Error('User no found');
 
     const photoUrl = await cloudinary.uploader.upload(photo)
 
-    const item = new Item({
+    const item = new Item.create({
       title,
       description,
       price,
@@ -41,7 +46,7 @@ const createItem = async (req, res) => {
       photo: photoUrl.url,
     })
 
-    item.save();
+    user.inventory.push(item._id);
     res.status(200).json({ message: 'Item posted successfully' })
   } catch (error) {
     res.status(500).json({ message: error.message })

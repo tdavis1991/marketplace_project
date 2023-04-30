@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from './useAuthContext';
 
@@ -6,7 +7,8 @@ import { useAuthContext } from './useAuthContext';
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { dispatch } = useAuthContext()
+  const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
 
   const signup = async (name, email, password, avatar) => {
     setIsLoading(true);
@@ -20,13 +22,13 @@ export const useSignup = () => {
 
     const json = await response.json();
 
-    if(json.ok) {
+    if(!response.ok) {
       setIsLoading(false);
       setError(json.error);
       console.log('Something went wrong')
     }
 
-    if(!json.ok) {
+    if(response.ok) {
       // save token to local storage
       localStorage.setItem('user', JSON.stringify(json));
 
@@ -34,6 +36,7 @@ export const useSignup = () => {
       dispatch({ type: 'LOGIN', payload: json });
 
       setIsLoading(false);
+      navigate('/');
     }
   }
 

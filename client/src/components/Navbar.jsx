@@ -6,8 +6,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
   const { logout } = useLogout();
-
-  const token = localStorage.getItem('user');
+  const { user } = useAuthContext();
 
   const handleClick = () => {
     logout();
@@ -15,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div>
-      {token ? (
+      {user ? (
         <button onClick={handleClick}>Logout</button>
       ) : (
         <div>

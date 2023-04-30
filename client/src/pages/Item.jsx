@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 
-import { useLogin } from '../hooks/useLogin';
-
-const Login = () => {
+const Item = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    title: '',
+    description: '',
+    price: 0,
+    category: '',
+    photo: ''
   });
   const { login, isLoading, error } = useLogin();
 
@@ -20,25 +21,26 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await login(formData.email, formData.password);
-
     setFormData({
-      email: '',
-      password: '',
+      title: '',
+      description: '',
+      price: 0,
+      category: '',
+      photo: ''
     })
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Log In</h2>
+        <h2>Post item for sale</h2>
         <label>
-          Email:
-          <input type='email' name='email' value={formData.email} onChange={handleChange} />
+          Title:
+          <input type='title' name='title' value={formData.title} onChange={handleChange} />
         </label>
         <label>
-          Password:
-          <input type='password' name='password' value={formData.password} onChange={handleChange} />
+          Description:
+          <textarea name='description' value={formData.description} onChange={handleChange} />
         </label>
         <button type="submit" disabled={isLoading}>Sign Up</button>
         {error && <div>{error}</div>}
@@ -47,4 +49,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Item
