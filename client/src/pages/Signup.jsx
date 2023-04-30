@@ -53,8 +53,8 @@ const Signup = () => {
           <input type='file' name='avatar' value={formData.avatar} onChange={handleChange} />
         </label>
         <button disabled={isLoading} type="submit">Sign Up</button>
+        {error && <div>{error}</div>}
       </form>
-      {error && <div>{error}</div>}
     </div>
   )
 }

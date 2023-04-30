@@ -9,5 +9,5 @@ export const useLogout = () => {
     dispatch({ type: 'LOGOUT' });
   }
 
-  return logout
+  return { logout }
 }
