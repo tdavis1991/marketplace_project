@@ -2,22 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../hooks/useAuthContext';
-
-const postItem = async ({ title, description, price, category, photo }) => {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const { user } = useAuthContext();
-
-  setIsLoading(true);
-  setError(null);
-
-  const response = await fetch('http://localhost:8080/api/v1/items', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ title, description, price, category, photo })
-  })
-}
+import { usePostItem } from '../hooks/usePostItem';
 
 const Item = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +12,9 @@ const Item = () => {
     category: '',
     photo: ''
   });
+  const { postItem, isLoading, error } = usePostItem();
+
+  const { user } = useAuthContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +26,8 @@ const Item = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
+
+    await postItem({...formData, email: user.email});
 
     setFormData({
       title: '',
@@ -46,7 +35,7 @@ const Item = () => {
       price: 0,
       category: '',
       photo: ''
-    })
+    });
   };
 
   return (
