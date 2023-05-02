@@ -1,4 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuthContext } from '../hooks/useAuthContext';
+
+const postItem = async ({ title, description, price, category, photo }) => {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useAuthContext();
+
+  setIsLoading(true);
+  setError(null);
+
+  const response = await fetch('http://localhost:8080/api/v1/items', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ title, description, price, category, photo })
+  })
+}
 
 const Item = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +27,6 @@ const Item = () => {
     category: '',
     photo: ''
   });
-  const { login, isLoading, error } = useLogin();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +38,7 @@ const Item = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData)
 
     setFormData({
       title: '',
@@ -42,8 +61,23 @@ const Item = () => {
           Description:
           <textarea name='description' value={formData.description} onChange={handleChange} />
         </label>
-        <button type="submit" disabled={isLoading}>Sign Up</button>
-        {error && <div>{error}</div>}
+        <label>
+          Price:
+          <input type='number' name='price' value={formData.price} onChange={handleChange} />
+        </label>
+        <select name='category' value={formData.category} onChange={handleChange}>
+          <option value="">Select an option</option>
+          <option value="electronic">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="outdoor">Outdoor</option>
+        </select>
+
+        <label>
+          Photo:
+          <input type='file' name='photo' value={formData.photo} onChange={handleChange} />
+        </label>
+        <button type="submit">Post Item</button>
+        {/* {error && <div>{error}</div>} */}
       </form>
     </div>
   )
