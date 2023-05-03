@@ -27,7 +27,7 @@ const Item = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await postItem({...formData, email: user.email});
+    await postItem(formData.title, formData.description, formData.price, formData.category, formData.photo, user.email);
 
     setFormData({
       title: '',
@@ -44,7 +44,7 @@ const Item = () => {
         <h2>Post item for sale</h2>
         <label>
           Title:
-          <input type='title' name='title' value={formData.title} onChange={handleChange} />
+          <input type='text' name='title' value={formData.title} onChange={handleChange} />
         </label>
         <label>
           Description:
@@ -66,7 +66,7 @@ const Item = () => {
           <input type='file' name='photo' value={formData.photo} onChange={handleChange} />
         </label>
         <button type="submit">Post Item</button>
-        {/* {error && <div>{error}</div>} */}
+        {error && <div>{error}</div>}
       </form>
     </div>
   )
