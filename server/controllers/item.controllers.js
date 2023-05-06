@@ -26,15 +26,14 @@ const getAllItems = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 };
+
 const getItemDetails = async (req, res) => {
   try {
     const { id } = req.params;
 
     const itemExists = await Item.findOne({ _id: id }).populate('creator');
 
-    if(!itemExists) {
-      throw Error('Item not found');
-    }
+    if(!itemExists) throw new Error('Item not found');
 
     res.status(200).json(itemExists);
   } catch (error) {
@@ -71,6 +70,7 @@ const createItem = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 };
+
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params
@@ -90,7 +90,22 @@ const updateItem = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 };
-const deleteItem = async (req, res) => {};
+
+const deleteItem = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const itemToDelete = await Item.findById({ _id: id }).populate('creator');
+
+    if(!itemToDelete) throw new Error('Item not found');
+
+    itemToDelete.creator.inventory.pull(itemToDelete);
+
+    res.status(200).json({ message: 'Item deleted successfully' })
+  } catch (error) {
+    res.status(500).json({ error: error.meaasge })
+  }
+};
 
 export {
   getAllItems,

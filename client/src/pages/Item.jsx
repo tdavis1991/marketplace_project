@@ -16,6 +16,8 @@ const Item = () => {
 
   const { user } = useAuthContext();
 
+  console.log('Rendering Item component with user:', user)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -37,6 +39,10 @@ const Item = () => {
       photo: ''
     });
   };
+
+  if (!user) {
+    return <div>Loading...</div>; // Or redirect to login page
+  }
 
   return (
     <div>
