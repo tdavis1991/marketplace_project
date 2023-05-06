@@ -26,16 +26,27 @@ const getAllItems = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 };
-const getItemDetails = async (req, res) => {};
+const getItemDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const itemExists = await Item.findOne({ _id: id }).populate('creator');
+
+    if(!itemExists) {
+      throw Error('Item not found');
+    }
+
+    res.status(200).json(itemExists);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 const createItem = async (req, res) => {
   try {
     const { title, description, price, category, photo, email } = req.body;
 
-    
-
     const user = await User.findOne({ email });
-    // console.log(user)
     
     if(!user) throw new Error('User not found');
     
@@ -48,17 +59,37 @@ const createItem = async (req, res) => {
       price,
       category,
       photo,
+      creator: user._id,
     })
 
-    console.log(newItem)
-
     user.inventory.push(newItem._id);
+
+    await user.save();
+
     res.status(200).json({ message: 'Item posted successfully' })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 };
-const updateItem = async (req, res) => {};
+const updateItem = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const { title, description, price, category, photo } = req.body
+
+    await Item.findByIdAndUpdate({ _id: id }, {
+      title,
+      description,
+      price,
+      category,
+      photo,
+    })
+  
+    res.status(200).json({ message: 'Item updated sucesfully' })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+};
 const deleteItem = async (req, res) => {};
 
 export {
