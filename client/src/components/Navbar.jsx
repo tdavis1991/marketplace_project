@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   return (
-    <div>
+    <div >
       {user ? (
         <button onClick={handleClick}>Logout</button>
       ) : (

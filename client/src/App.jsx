@@ -16,7 +16,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="h-screen flex flex-col items-center justify-center w-full">
       <BrowserRouter>
         <Navbar />
         <Routes>
