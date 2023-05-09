@@ -1,11 +1,15 @@
 import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
-import Item from "./Item";
+import ItemForm from "./ItemForm";
+import Shop from './Shop';
+import About from "./About";
 
 export {
   Login,
   Signup,
   Home,
-  Item,
+  ItemForm,
+  Shop,
+  About,
 }

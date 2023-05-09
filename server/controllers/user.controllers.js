@@ -38,6 +38,8 @@ const loginUser = async (req, res) => {
 
     const user = await User.findOne({ email });
 
+    const avatar = user.avatar
+
     if(!user) {
       throw Error('Incorrect email');
     };
@@ -49,8 +51,9 @@ const loginUser = async (req, res) => {
     }
 
     const token = createToken(user._id);
+    console.log(user.avatar)
 
-    res.status(200).json({ message: 'User logged in!', email, token });
+    res.status(200).json({ message: 'User logged in!', email, token, avatar });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

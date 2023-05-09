@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Home = () => {
+
   return (
     <div>
       <a href='/create'>ITEM</a>
