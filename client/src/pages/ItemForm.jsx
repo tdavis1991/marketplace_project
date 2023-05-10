@@ -10,13 +10,14 @@ const Item = () => {
     description: '',
     price: 0,
     category: '',
-    photo: ''
+    photo: { name: '', url: '' }
   });
+
   const { postItem, isLoading, error } = usePostItem();
 
   const { user } = useAuthContext();
 
-  console.log('Rendering Item component with user:', user)
+  // console.log('Rendering Item component with user:', user)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,8 +27,23 @@ const Item = () => {
     }));
   };
 
+  const handleImageChange = (file) => {
+    const reader = (readFile) =>
+      new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.readAsDataURL(readFile);
+      });
+  
+    reader(file).then((result) =>
+      setFormData.photo({ name: file?.name, url: result })
+    );
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData.photo)
 
     await postItem(formData.title, formData.description, formData.price, formData.category, formData.photo, user.email);
 
@@ -69,7 +85,7 @@ const Item = () => {
 
         <label>
           Photo:
-          <input type='file' name='photo' value={formData.photo} onChange={handleChange} />
+          <input type='file' name='photo' value={formData.photo} onChange={(e) => handleImageChange(e.target.files[0])} />
         </label>
         <button type="submit">Post Item</button>
         {error && <div>{error}</div>}
