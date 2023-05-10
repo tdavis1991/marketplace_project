@@ -20,7 +20,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='absolute flex justify-between items-center top-0 bg-green-500 w-full h-15' >
+    <div className='absolute flex justify-between items-center top-0 bg-primary w-full h-15 text-white' >
       <Link to='/' className='ml-10'><h2>Frostplace</h2></Link>
       <div className='flex gap-10'>
         <Link to='/'>Home</Link>

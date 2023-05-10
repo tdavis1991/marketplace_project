@@ -36,7 +36,7 @@ const Signup = () => {
   return (
     <div className='h-screen w-9/12 flex items-center justify-start'>
       <img className='fixed top-0 left-0 h-screen w-full overflow-hidden -z-10' src={desktopBg} alt='desktop image' />
-      <form onSubmit={handleSubmit} className='flex flex-col gap-10 bg-white h-1/2 items-center w-1/3 rounded-xl shadow-md'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-10 bg-white  items-center w-1/3 rounded-xl shadow-md py-10'>
         <div>
           <h1 className='font-bold'>Sign Up</h1>
         </div>
@@ -57,7 +57,7 @@ const Signup = () => {
             Avatar:
             <input type='file' name='avatar' value={formData.avatar} onChange={handleChange} />
           </label>
-          <button className='bg-green-500 rounded-xl w-2/3 m-auto py-1' disabled={isLoading} type="submit">Sign Up</button>
+          <button className='bg-quaternary rounded-xl w-2/3 m-auto py-1' disabled={isLoading} type="submit">Sign Up</button>
           {error && <div>{error}</div>}
         </div>
       </form>
