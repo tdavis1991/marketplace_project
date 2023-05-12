@@ -10,6 +10,7 @@ const Navbar = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
+  const token = localStorage.getItem('user')
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -36,7 +37,7 @@ const Navbar = () => {
             <Link to='/signup'>Sign Up</Link>
           </div>
         )}
-        <img className='w-[30px] h-[30px]' src={defaultProfile} alt='profile' onClick={toggleDropdown} />
+        <img className='w-[30px] h-[30px]' src={token.avatar} alt='profile' onClick={toggleDropdown} />
         {isOpen && <ProfileDropdown />}
         <img className='h-[30px] w-[30px]' src={shoppingCart} alt='shopping cart' />
       </div>

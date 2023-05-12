@@ -49,15 +49,15 @@ const createItem = async (req, res) => {
     
     if(!user) throw new Error('User not found');
     
-    const photoUrl = await cloudinary.uploader.upload(photo)
+    // const photoUrl = await cloudinary.uploader.upload(photo)
     
-    console.log(photoUrl)
+    // console.log(photoUrl)
     const newItem = await Item.create({
       title,
       description,
       price,
       category,
-      photo: photoUrl,
+      photo,
       creator: user._id,
     })
 

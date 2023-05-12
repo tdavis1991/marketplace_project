@@ -10,8 +10,9 @@ const Item = () => {
     description: '',
     price: 0,
     category: '',
-    photo: { name: '', url: '' }
   });
+
+  const [photo, setPhoto] = useState({ name: '', url: '' });
 
   const { postItem, isLoading, error } = usePostItem();
 
@@ -36,24 +37,25 @@ const Item = () => {
       });
   
     reader(file).then((result) =>
-      setFormData.photo({ name: file?.name, url: result })
+      setPhoto({ name: file?.name, url: result })
     );
   };
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.photo)
+    console.log(photo)
 
-    await postItem(formData.title, formData.description, formData.price, formData.category, formData.photo, user.email);
+    await postItem(formData.title, formData.description, formData.price, formData.category, photo.url, user.email);
 
     setFormData({
       title: '',
       description: '',
       price: 0,
       category: '',
-      photo: ''
     });
+
+    setPhoto({ name: '', url: '' })
   };
 
   if (!user) {
@@ -85,7 +87,7 @@ const Item = () => {
 
         <label>
           Photo:
-          <input type='file' name='photo' value={formData.photo} onChange={(e) => handleImageChange(e.target.files[0])} />
+          <input hidden accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
         </label>
         <button type="submit">Post Item</button>
         {error && <div>{error}</div>}

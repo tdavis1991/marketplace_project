@@ -8,8 +8,10 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
-    avatar: ''
   });
+
+  const [avatar, setAvatar] = useState({ name: '', url: '' })
+
   const { signup, isLoading, error } = useSignup();
 
   const handleChange = (e) => {
@@ -20,10 +22,23 @@ const Signup = () => {
     }));
   };
 
+  const handleAvatarChange = (file) => {
+    const reader = (readFile) =>
+      new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.readAsDataURL(readFile);
+      });
+  
+    reader(file).then((result) =>
+      setAvatar({ name: file?.name, url: result })
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(formData.name, formData.email, formData.password, formData.avatar);
+    await signup(formData.name, formData.email, formData.password, avatar.url);
 
     setFormData({
       name: '',
@@ -31,6 +46,8 @@ const Signup = () => {
       password: '',
       avatar: ''
     })
+
+    setAvatar({ name: '', url: '' })
   };
 
   return (
@@ -40,7 +57,7 @@ const Signup = () => {
         <div>
           <h1 className='font-bold'>Sign Up</h1>
         </div>
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3 w-3/5'>
           <label className='flex flex-col'>
             Name:
             <input className='rounded-lg' placeholder='Enter name' type="text" name='name' value={formData.name} onChange={handleChange} />
@@ -55,7 +72,7 @@ const Signup = () => {
           </label>
           <label className='flex flex-col'>
             Avatar:
-            <input type='file' name='avatar' value={formData.avatar} onChange={handleChange} />
+            <input hidden accept='image/*' type='file' onChange={(e) => handleAvatarChange(e.target.files[0])} />
           </label>
           <button className='bg-quaternary rounded-xl w-2/3 m-auto py-1' disabled={isLoading} type="submit">Sign Up</button>
           {error && <div>{error}</div>}
