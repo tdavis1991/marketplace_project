@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useSignup } from '../hooks/useSignup';
 import { desktopBg } from '../assests';
@@ -13,6 +13,10 @@ const Signup = () => {
   const [avatar, setAvatar] = useState({ name: '', url: '' })
 
   const { signup, isLoading, error } = useSignup();
+
+  useEffect(() => {
+    console.log('Avatar State:', avatar);
+  }, [avatar]);  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,21 +34,21 @@ const Signup = () => {
         fileReader.readAsDataURL(readFile);
       });
   
-    reader(file).then((result) =>
-      setAvatar({ name: file?.name, url: result })
-    );
+    reader(file).then((result) => {
+      setAvatar({ name: file?.name, url: result });
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('AVATAR', avatar)
     await signup(formData.name, formData.email, formData.password, avatar.url);
 
     setFormData({
       name: '',
       email: '',
       password: '',
-      avatar: ''
     })
 
     setAvatar({ name: '', url: '' })

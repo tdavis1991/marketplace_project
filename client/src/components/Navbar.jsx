@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useLogout } from '../hooks/useLogout';
@@ -10,7 +10,11 @@ const Navbar = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
-  const token = localStorage.getItem('user')
+  const token = localStorage.getItem('user');
+
+  useEffect(() => {
+    console.log('USER DATA', user?.avatar);
+  }, [user]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -29,6 +33,11 @@ const Navbar = () => {
         <Link to='/about'>About</Link>
       </div>
       <div className='flex mr-10 gap-5'>
+        {user?.avatar  && 
+          <img className='w-[30px] h-[30px] rounded-full' src={user.avatar} alt='profile' onClick={toggleDropdown} />
+        }
+        {isOpen && <ProfileDropdown />}
+        {user && <img className='h-[30px] w-[30px]' src={shoppingCart} alt='shopping cart' />}
         {user ? (
           <button onClick={handleClick}>Logout</button>
         ) : (
@@ -37,9 +46,6 @@ const Navbar = () => {
             <Link to='/signup'>Sign Up</Link>
           </div>
         )}
-        <img className='w-[30px] h-[30px]' src={token.avatar} alt='profile' onClick={toggleDropdown} />
-        {isOpen && <ProfileDropdown />}
-        <img className='h-[30px] w-[30px]' src={shoppingCart} alt='shopping cart' />
       </div>
     </div>
   )

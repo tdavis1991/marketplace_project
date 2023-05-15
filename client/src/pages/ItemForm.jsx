@@ -44,7 +44,7 @@ const Item = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(photo)
+    console.log('ITEM', photo)
 
     await postItem(formData.title, formData.description, formData.price, formData.category, photo.url, user.email);
 
