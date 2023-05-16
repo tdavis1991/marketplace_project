@@ -33,9 +33,11 @@ const Navbar = () => {
         <Link to='/about'>About</Link>
       </div>
       <div className='flex mr-10 gap-5'>
-        {user?.avatar  && 
+        {user?.avatar ? (
           <img className='w-[30px] h-[30px] rounded-full' src={user.avatar} alt='profile' onClick={toggleDropdown} />
-        }
+        ) : (
+          <img className='w-[30px] h-[30px] rounded-full' src={defaultProfile} alt='profile' onClick={toggleDropdown} />
+        )}
         {isOpen && <ProfileDropdown />}
         {user && <img className='h-[30px] w-[30px]' src={shoppingCart} alt='shopping cart' />}
         {user ? (

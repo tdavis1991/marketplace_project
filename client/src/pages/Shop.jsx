@@ -1,35 +1,15 @@
-// import React, { useEffect, useState } from 'react';
-
-// import { useShop } from '../hooks/useShop';
-
-// const Shop = () => {
-//   const [error, seteError] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     seteError(null);
-
-//     fetch('http://localhost:8080/api/v1/items')
-//       .then(response => {
-//         setData(response.json())
-//       })
-//       .then(data => console.log('DATA', data))
-//       .catch(error => console.error(error));
-//   }, []);
-
-//   console.log(data, error)
-//   return (
-//     <div>Shop</div>
-//   )
-// }
-
-// export default Shop;
-
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect, CSSProperties } from "react";
+import { Link } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 
 import { useShop } from '../hooks/useShop';
+import { ItemCard } from '../components';
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const Shop = () => {
   const [error, setError] = useState(null);
@@ -53,15 +33,24 @@ const Shop = () => {
   console.log(data, error);
   
   return (
-    <div>
-      {data?.map((item, index) => (
-        <div key={item._id}>
-          <h1>{item.title}</h1>
-          <p>{item.price}</p>
-          <p>{item.description}</p>
-          <img src={item.photo} alt={`${item.title}`}/>
-        </div>
+    <div className='flex flex-wrap gap-5 w-5/6'>
+      {data?.map((item) => (
+        <ItemCard 
+          title={item.title}
+          price={item.price}
+          category={item.category}
+          photo={item.photo}
+          id={item._id}
+        />
       ))}
+      <ClipLoader
+        color='#05BFDB'
+        loading={loading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
     </div>
   );
 };
