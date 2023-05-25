@@ -20,7 +20,7 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClick = () => {
+  const handleClickLogout = () => {
     logout();
   }
 
@@ -41,7 +41,7 @@ const Navbar = () => {
         {isOpen && <ProfileDropdown />}
         {user && <img className='h-[30px] w-[30px]' src={shoppingCart} alt='shopping cart' />}
         {user ? (
-          <button onClick={handleClick}>Logout</button>
+          <button onClick={handleClickLogout}>Logout</button>
         ) : (
           <div className='flex gap-5'>
             <Link to='/login'>Login</Link>
