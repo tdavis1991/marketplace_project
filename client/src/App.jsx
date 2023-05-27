@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { Signup, Login, Home, ItemForm, Shop, About, Profile } from './pages';
+import { Signup, Login, Home, ItemForm, Shop, About, Profile, ItemDetail } from './pages';
 import { Navbar, Footer } from './components';
 import { useAuthContext } from './hooks/useAuthContext';
 import './App.css';
@@ -28,8 +28,9 @@ function App() {
             ) : (
               <Route path='/create' element={<Navigate to='/login' />} />
             )}
-            <Route path='/profile/:id' element={!token ? <Profile /> : <Navigate to='/login' />} />
+            <Route path='/profile/:id' element={token ? <Profile /> : <Navigate to='/login' />} />
             <Route path='/shop' element={<Shop />} />
+            <Route path='/shop/:id' element={<ItemDetail />} />
             <Route path='/about' element={<About />} />
             <Route path='/' element={<Home />} />
           </Routes>

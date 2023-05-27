@@ -5,6 +5,7 @@ import ItemForm from "./ItemForm";
 import Shop from './Shop';
 import About from "./About";
 import Profile from "./Profile";
+import ItemDetail from "./ItemDetail";
 
 export {
   Login,
@@ -13,5 +14,6 @@ export {
   ItemForm,
   Shop,
   About,
-  Profile
+  Profile,
+  ItemDetail
 }

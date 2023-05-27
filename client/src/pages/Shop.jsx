@@ -1,15 +1,9 @@
 import { useState, useEffect, CSSProperties } from "react";
 import { Link } from 'react-router-dom';
-import ClipLoader from "react-spinners/ClipLoader";
 
 import { useShop } from '../hooks/useShop';
 import { ItemCard } from '../components';
-
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
+import { Loader } from '../components';
 
 const Shop = () => {
   const [error, setError] = useState(null);
@@ -43,14 +37,7 @@ const Shop = () => {
           id={item._id}
         />
       ))}
-      <ClipLoader
-        color='#05BFDB'
-        loading={loading}
-        cssOverride={override}
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+      <Loader loading={loading} />
     </div>
   );
 };
