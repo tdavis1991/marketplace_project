@@ -38,6 +38,7 @@ const loginUser = async (req, res) => {
 
     const user = await User.findOne({ email });
 
+    const userId = user._id
     const avatar = user.avatar
 
     if(!user) {
@@ -53,7 +54,7 @@ const loginUser = async (req, res) => {
     const token = createToken(user._id);
     console.log(user.avatar)
 
-    res.status(200).json({ message: 'User logged in!', email, token, avatar });
+    res.status(200).json({ message: 'User logged in!', email, token, avatar, userId });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -94,8 +95,9 @@ const signupUser = async (req, res) => {
     })
 
     const token = createToken(user._id);
+    const userId = user._id
     
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token, userId });
   } catch (error) {
     res.status(400).json({ message: error.message })
   }

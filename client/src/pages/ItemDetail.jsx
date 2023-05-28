@@ -1,9 +1,85 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+
+import { Loader } from '../components';
+import { rating } from '../assests';
+
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const ItemDetail = () => {
+  const [item, setItem] = useState({});
+  const [category, setCategory] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [count, setCount] = useState(1);
+  const { id } = useParams();
+  
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    fetch(`http://localhost:8080/api/v1/items/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        setItem(data);
+      })
+      .catch(error => setError(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    if (item.category) {
+      setLoading(true);
+      setError(null);
+  
+      fetch(`http://localhost:8080/api/v1/items/category/${item.category}`)
+        .then(response => response.json())
+        .then(data => {
+          setCategory(data);
+        })
+        .catch(error => setError(error))
+        .finally(() => setLoading(false));
+    }
+  }, [item.category]);
+
+  console.log(item, category);
+
   return (
-    <div>ItemDetail</div>
+    <div className='w-full'>
+      {!loading ? (
+      <div className='flex w-5/6 mt-10 justify-between'>
+        <img src={item?.photo} className='w-[500px] h-[500px] object-contain' />
+        <div className='w-1/3'>
+          <h2 className='font-bold'>{item?.title}</h2>
+          <h3 className='text-xl'>Price: ${item?.price}.00</h3>
+          <div className='flex items-center mt-3'>
+            <img src={rating} alt='rating' className='h-[50px] w-[125px]' />
+            <p>(20k reviews)</p>
+          </div>
+          <p className='my-5'>{item?.description}</p>
+          <div className='w-full flex'>
+            <button className='bg-quaternary rounded-xl w-1/2 py-2 text-white'>Add to Cart</button>
+            <select name='count' value={count} onChange={() => setCount(count)}>
+              {nums.map((num) => {
+                <option key={num} value={num}>{num}</option>
+              })}
+            </select>
+          </div>
+        </div>
+        <div className='w-1/4 flex flex-wrap'>
+          <h2>Related Items</h2>
+          {category?.map((item) => (
+            <Link to={`/${item?.id}`}>
+              <img src={item.photo} className='w-[100px] height-[100px]' />
+            </Link>
+          ))}
+        </div>
+      </div>
+      ) : (
+        <Loader loading={loading} />
+      )}
+    </div>
   )
 }
 
-export default ItemDetail
+export default ItemDetail;
