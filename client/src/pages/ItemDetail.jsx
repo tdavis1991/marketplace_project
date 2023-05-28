@@ -42,37 +42,41 @@ const ItemDetail = () => {
     }
   }, [item.category]);
 
-  console.log(item, category);
+  console.log(item);
 
   return (
     <div className='w-full'>
       {!loading ? (
-      <div className='flex w-5/6 mt-10 justify-between'>
-        <img src={item?.photo} className='w-[500px] h-[500px] object-contain' />
-        <div className='w-1/3'>
-          <h2 className='font-bold'>{item?.title}</h2>
-          <h3 className='text-xl'>Price: ${item?.price}.00</h3>
-          <div className='flex items-center mt-3'>
-            <img src={rating} alt='rating' className='h-[50px] w-[125px]' />
-            <p>(20k reviews)</p>
-          </div>
-          <p className='my-5'>{item?.description}</p>
-          <div className='w-full flex'>
-            <button className='bg-quaternary rounded-xl w-1/2 py-2 text-white'>Add to Cart</button>
-            <select name='count' value={count} onChange={() => setCount(count)}>
-              {nums.map((num) => {
-                <option key={num} value={num}>{num}</option>
-              })}
-            </select>
+      <div className='flex w-full justify-center'>
+        <div className='w-3/5 flex gap-5'>
+          <img src={item?.photo} className='w-[500px] h-[500px] object-contain' />
+          <div className='w-1/3'>
+            <h2 className='font-bold'>{item?.title}</h2>
+            <h3 className='text-xl'>Price: ${item?.price}.00</h3>
+            <div className='flex items-center mt-3'>
+              <img src={rating} alt='rating' className='h-[50px] w-[125px]' />
+              <p>(20k reviews)</p>
+            </div>
+            <p className='my-5'>{item?.description}</p>
+            <div className='w-full flex'>
+              <button className='bg-quaternary rounded-xl w-1/2 py-2 text-white'>Add to Cart</button>
+              <select className='w-[50px] border-2 rounded-xl ml-5' name='count' value={count} onChange={() => setCount(count)}>
+                {nums.map((num) => (
+                  <option key={num} value={num}>{num}</option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
-        <div className='w-1/4 flex flex-wrap'>
+        <div className='w-1/4 flex flex-col'>
           <h2>Related Items</h2>
-          {category?.map((item) => (
-            <Link to={`/${item?.id}`}>
-              <img src={item.photo} className='w-[100px] height-[100px]' />
-            </Link>
-          ))}
+          <div className='w-full flex flex-wrap mt-5'>
+            {category?.map((item) => (
+              <Link to={`/shop/${item?._id}`} className='hover:border-2'>
+                <img src={item.photo} className='w-[100px] height-[100px] m-2' />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
       ) : (

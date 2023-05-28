@@ -6,7 +6,7 @@ import { rating } from '../assests';
 const ItemCard = ({ title, price, category, photo, id }) => {
   return (
     <Link to={`${id}`} className='w-1/4'>
-      <div key={id} className='w-full border rounded-xl flex flex-col items-center shadow-md'>
+      {/* <div key={id} className='w-full border rounded-xl flex flex-col items-center shadow-md'>
         <img className='object-cover w-full h-[200px] rounded-t-xl' src={photo} alt={`${title}`} />
         <div className='flex flex-col items-start w-5/6'>
           <h2 className='font-bold'>{title}</h2>
@@ -17,6 +17,18 @@ const ItemCard = ({ title, price, category, photo, id }) => {
           <h3>{`$${price}.00`}</h3>
           <p>{category}</p>
           <button className='bg-quaternary rounded-xl w-1/3 py-2 my-3 text-white'>Add to Cart</button>
+        </div>
+      </div> */}
+      <div className="card w-96 bg-base-100 shadow-xl">
+        <figure className="px-10 pt-10">
+          <img src={photo} alt={title} className="rounded-xl" />
+        </figure>
+        <div className="card-body items-center text-center">
+          <h2 className="card-title">{title}</h2>
+          <h3>{`$${price}.00`}</h3>
+          <div className="card-actions">
+            <button className="btn bg-quaternary">Buy Now</button>
+          </div>
         </div>
       </div>
     </Link>
