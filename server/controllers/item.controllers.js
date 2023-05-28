@@ -41,6 +41,18 @@ const getItemDetails = async (req, res) => {
   }
 };
 
+const getItemCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const itemCategory = await Item.find({ category: id })
+
+    res.status(200).json(itemCategory);
+  } catch (error) {
+    res.status(500).json({ message: message.error });
+  }
+}
+
 const createItem = async (req, res) => {
   try {
     const { title, description, price, category, photo, email } = req.body;
@@ -113,4 +125,5 @@ export {
   createItem,
   updateItem,
   deleteItem,
+  getItemCategory,
 }
