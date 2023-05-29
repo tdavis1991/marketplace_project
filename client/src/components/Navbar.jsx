@@ -20,9 +20,9 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickLogout = () => {
-    logout();
-  }
+  // const handleClickLogout = () => {
+  //   logout();
+  // }
 
   return (
     <div className='absolute flex flex-col items-center top-0 w-full' >
@@ -47,14 +47,12 @@ const Navbar = () => {
           )}
           {isOpen && <ProfileDropdown />}
           {user && <img className='h-[30px] w-[30px]' src={shoppingCart} alt='shopping cart' />}
-          {user ? (
-            <button onClick={handleClickLogout}>Logout</button>
-          ) : (
+          {!user &&
             <div className='flex gap-5'>
               <Link to='/login'>Login</Link>
               <Link to='/signup'>Sign Up</Link>
             </div>
-          )}
+          }
         </div>
       </div>
 

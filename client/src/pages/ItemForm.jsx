@@ -87,7 +87,7 @@ const Item = () => {
 
         <label>
           Photo:
-          <input hidden accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
+          <input className="file-input file-input-bordered w-full max-w-xs" accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
         </label>
         <button type="submit">Post Item</button>
         {error && <div>{error}</div>}
