@@ -27,7 +27,7 @@ const Shop = () => {
   console.log(data, error);
   
   return (
-    <div className='flex flex-wrap gap-5 w-5/6'>
+    <div className='flex justify-between flex-wrap gap-5 w-5/6'>
       {data?.map((item) => (
         <ItemCard 
           title={item.title}

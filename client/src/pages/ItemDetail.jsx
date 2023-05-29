@@ -45,7 +45,7 @@ const ItemDetail = () => {
   console.log(item);
 
   return (
-    <div className='w-full'>
+    <div className='w-full mt-10'>
       {!loading ? (
       <div className='flex w-full justify-center'>
         <div className='w-3/5 flex gap-5'>

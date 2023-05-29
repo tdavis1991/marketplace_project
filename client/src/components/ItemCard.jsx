@@ -19,15 +19,19 @@ const ItemCard = ({ title, price, category, photo, id }) => {
           <button className='bg-quaternary rounded-xl w-1/3 py-2 my-3 text-white'>Add to Cart</button>
         </div>
       </div> */}
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure className="px-10 pt-10">
-          <img src={photo} alt={title} className="rounded-xl" />
+      <div className="card h-[450px] w-96 bg-base-100 shadow-md">
+        <figure className="px-10 pt-10 relative overflow-hidden h-[300px] w-[350px] mx-auto">
+          <img src={photo} alt={title} className="max-w-full max-h-full mx-auto object-center" />
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{title}</h2>
           <h3>{`$${price}.00`}</h3>
+          <div className='flex items-center'>
+            <img src={rating} alt='rating' className='h-[50px] w-[125px]' />
+            <p>(20k reviews)</p>
+          </div>
           <div className="card-actions">
-            <button className="btn bg-quaternary">Buy Now</button>
+            <button className="btn bg-quaternary">Add to cart</button>
           </div>
         </div>
       </div>
