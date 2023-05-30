@@ -25,12 +25,18 @@ const Navbar = () => {
   // }
 
   return (
-    <div className='absolute flex flex-col items-center top-0 w-full' >
-      <div className='flex justify-center w-full bg-primary text-white'>
-        <div className='flex items-center w-11/12 gap-2'>
+    <div className='flex flex-col items-center top-0 w-full' >
+      <div className='flex justify-between w-full bg-primary text-white'>
+        <div className='flex items-center gap-2 ml-5'>
           <img src={phone} alt='phone' className='h-[20px] w-[20px]' />
           <p>555-555-5555</p>
         </div>
+        <div className='flex justify-between'>
+          <p>Get 50% off on Selected Items</p>
+          <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+          <p>Shop now</p>
+        </div>
+        <p className='mr-5'>Eng &#x2193;</p>
       </div>
       <div className='flex justify-between items-center h-15 w-11/12'>
         <Link to='/' className='ml-10'><h2><span className='text-quaternary'>F</span>rostplace</h2></Link>

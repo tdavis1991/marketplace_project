@@ -19,7 +19,7 @@ function App() {
     <div className="flex flex-col items-center justify-center w-full">
       <BrowserRouter>
         <Navbar />
-        <div className='h-screen flex flex-col items-center justify-center w-full'>
+        <div className='flex flex-col items-center justify-center w-full'>
           <Routes>
             <Route path='/signup' element={!token ? <Signup /> : <Navigate to='/' />} />
             <Route path='/login' element={!token ? <Login /> : <Navigate to='/' />} />
