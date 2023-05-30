@@ -24,20 +24,24 @@ const Shop = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  console.log(data, error);
+  // if(loading) {
+  //   return <Loader loading={loading} />
+  // }
   
   return (
-    <div className='flex justify-between flex-wrap gap-5 w-5/6'>
-      {data?.map((item) => (
-        <ItemCard 
-          title={item.title}
-          price={item.price}
-          category={item.category}
-          photo={item.photo}
-          id={item._id}
-        />
-      ))}
-      <Loader loading={loading} />
+    <div className='flex flex-col gap-3 items-center w-5/6 mt-5'>
+      <div class="bg-gradient-to-br from-teal-400 to-blue-900 h-[350px] w-full"></div>
+      <div className="flex justify-between flex-wrap gap-3 w-5/6 m-auto">
+        {data?.map((item) => (
+          <ItemCard 
+            title={item.title}
+            price={item.price}
+            category={item.category}
+            photo={item.photo}
+            id={item._id}
+          />
+        ))}
+      </div>
     </div>
   );
 };
