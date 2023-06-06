@@ -25,7 +25,7 @@ const Navbar = () => {
   // }
 
   return (
-    <div className='flex flex-col items-center top-0 w-full' >
+    <div className='flex flex-col items-center top-0 w-full absolute' >
       <div className='flex justify-between w-full bg-primary text-white'>
         <div className='flex items-center gap-2 ml-5'>
           <img src={phone} alt='phone' className='h-[20px] w-[20px]' />
