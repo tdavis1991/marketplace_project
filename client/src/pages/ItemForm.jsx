@@ -10,6 +10,7 @@ const Item = () => {
     description: '',
     price: 0,
     category: '',
+    rating: 0,
   });
 
   const [photo, setPhoto] = useState({ name: '', url: '' });
@@ -46,13 +47,14 @@ const Item = () => {
     e.preventDefault();
     console.log('ITEM', photo)
 
-    await postItem(formData.title, formData.description, formData.price, formData.category, photo.url, user.email);
+    await postItem(formData.title, formData.description, formData.price, formData.rating, formData.category, photo.url, user.email);
 
     setFormData({
       title: '',
       description: '',
       price: 0,
       category: '',
+      rating: 0,
     });
 
     setPhoto({ name: '', url: '' })
@@ -77,6 +79,10 @@ const Item = () => {
         <label>
           Price:
           <input type='number' name='price' value={formData.price} onChange={handleChange} />
+        </label>
+        <label>
+          Rating:
+          <input type='number' name='rating' value={formData.rating} onChange={handleChange} />
         </label>
         <select name='category' value={formData.category} onChange={handleChange}>
           <option value="">Select an option</option>

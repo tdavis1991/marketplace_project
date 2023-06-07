@@ -6,17 +6,17 @@ export const usePostItem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const postItem = async (title, description, price, category, photo, email) => {
+  const postItem = async (title, description, price, rating, category, photo, email) => {
     setIsLoading(true);
     setError(null);
 
     const response = await fetch('http://localhost:8080/api/v1/items', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({title, description, price, category, photo, email})
+      body: JSON.stringify({title, description, price, rating, category, photo, email})
     });
 
-    console.log(title, description, price, category, photo, email)
+    console.log(title, description, price, rating, category, photo, email)
 
     const json = await response.json();
 

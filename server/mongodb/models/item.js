@@ -6,6 +6,7 @@ const ItemSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   category: { type: String, required: true },
   photo: { type: String, required: true },
+  rating: { type: Number },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

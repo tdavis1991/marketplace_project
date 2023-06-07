@@ -55,7 +55,7 @@ const getItemCategory = async (req, res) => {
 
 const createItem = async (req, res) => {
   try {
-    const { title, description, price, category, photo, email } = req.body;
+    const { title, description, price, rating, category, photo, email } = req.body;
 
     const user = await User.findOne({ email });
     
@@ -68,6 +68,7 @@ const createItem = async (req, res) => {
       title,
       description,
       price,
+      rating,
       category,
       photo,
       creator: user._id,
