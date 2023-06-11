@@ -25,9 +25,9 @@ const Shop = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // if(loading) {
-  //   return <Loader loading={loading} />
-  // }
+  if(loading) {
+    return <Loader loading={loading} />
+  }
   
   return (
     <div className='flex flex-col gap-3 items-center w-5/6 my-5'>
@@ -71,6 +71,7 @@ const Shop = () => {
             price={item.price}
             category={item.category}
             photo={item.photo}
+            rating={item.rating}
             id={item._id}
           />
         ))}

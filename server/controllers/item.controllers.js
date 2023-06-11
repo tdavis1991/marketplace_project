@@ -19,7 +19,15 @@ cloudinary.config({
 //CRUD operations
 const getAllItems = async (req, res) => {
   try {
-    const items = await Item.find()
+    const { category, price, color } = req.body
+
+    const filter = {
+      category: category ? category : '',
+      price: price ? price : '',
+      color: color ? color : '',
+    }
+
+    const items = await Item.find(filter);
 
     res.status(200).json(items);
   } catch (error) {
@@ -71,6 +79,7 @@ const createItem = async (req, res) => {
       rating,
       category,
       photo,
+      numberOfRatings: 1,
       creator: user._id,
     })
 
@@ -88,17 +97,20 @@ const updateItem = async (req, res) => {
   try {
     const { id } = req.params
 
-    const { title, description, price, category, photo } = req.body
+    const { title, description, price, category, photo, rating } = req.body
 
-    await Item.findByIdAndUpdate({ _id: id }, {
-      title,
-      description,
-      price,
-      category,
-      photo,
-    })
+    const updatedItem = await Item.findByIdAndUpdate({ _id: id }, {
+        title,
+        description,
+        price,
+        category,
+        photo,
+        $inc: { numberOfRating: 1 }
+      },
+      { new: true }
+    )
   
-    res.status(200).json({ message: 'Item updated sucesfully' })
+    res.status(200).json({ message: 'Item updated sucesfully', updateItem })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
