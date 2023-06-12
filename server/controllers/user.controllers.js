@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 
 import User from '../mongodb/models/User.js';
+import Item from '../mongodb/models/item.js'
 
 dotenv.config();
 
@@ -12,19 +13,48 @@ const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' });
 };
 
+// const getUserInfoByID = async (req, res) => {
+//   try {
+//     const { id } = req.params
+
+//     const userExists = await User.findOne({ _id: id }).populate('inventory');
+
+//     if(!userExists) throw new Error('User not found');
+
+//     const inventory = [];
+
+//     await userExists.inventory.map((item) => {
+//       inventory.add(Item.findById({ _id }))
+//     })
+
+//     res.status(200).json(userExists, inventory);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
+
 const getUserInfoByID = async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
     const userExists = await User.findOne({ _id: id }).populate('inventory');
 
-    if(!userExists) throw new Error('User not found');
+    if (!userExists) {
+      throw new Error('User not found');
+    }
 
-    res.status(200).json(userExists);
+    const inventory = userExists.inventory;
+
+    const itemIds = inventory.map((item) => item._id);
+
+    const inventoryItems = await Item.find({ _id: { $in: itemIds } });
+
+    res.status(200).json({ userExists, inventoryItems });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // authenticate 
 const loginUser = async (req, res) => {
@@ -54,7 +84,8 @@ const loginUser = async (req, res) => {
     const token = createToken(user._id);
     console.log(user.avatar)
 
-    res.status(200).json({ message: 'User logged in!', email, token, avatar, userId });
+    // res.status(200).json({ message: 'User logged in!', email, token, avatar, userId });
+    res.status(200).json({ message: 'User logged in!',user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

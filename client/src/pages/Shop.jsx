@@ -30,8 +30,8 @@ const Shop = () => {
   }
   
   return (
-    <div className='flex flex-col gap-3 items-center w-5/6 my-5'>
-      <div class=" flex bg-gradient-to-br from-teal-400 to-blue-900 h-[350px] w-full relative">
+    <div className='flex flex-col gap-3 items-center w-full my-5'>
+      <div className=" flex bg-gradient-to-br from-teal-400 to-blue-900 h-[350px] w-full relative">
         <div className="w-1/2 my-auto ml-20">
           <h1 className="font-bold text-white">Grab Upto 50% off On Selected Items</h1>
           <button className="bg-quaternary rounded-full px-8 py-3 text-white">Buy Now</button>

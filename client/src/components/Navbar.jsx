@@ -13,12 +13,24 @@ const Navbar = () => {
   const token = localStorage.getItem('user');
 
   useEffect(() => {
-    console.log('USER DATA', user?.avatar);
+    console.log('USER DATA', user?.user?.avatar);
   }, [user]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  // useEffect(() => {
+  //   const handleDocumentClick = () => {
+  //     setIsOpen((prevIsOpen) => !prevIsOpen);
+  //   };
+
+  //   document.addEventListener('click', handleDocumentClick);
+
+  //   return () => {
+  //     document.removeEventListener('click', handleDocumentClick);
+  //   };
+  // }, []);
 
   // const handleClickLogout = () => {
   //   logout();
@@ -46,8 +58,8 @@ const Navbar = () => {
           <Link to='/about'>About</Link>
         </div>
         <div className='flex mr-10 gap-5'>
-          {user?.avatar ? (
-            <img className='w-[30px] h-[30px] rounded-full hover:cursor-pointer' src={user.avatar} alt='profile' onClick={toggleDropdown} />
+          {user?.user?.avatar ? (
+            <img className='w-[30px] h-[30px] rounded-full hover:cursor-pointer' src={user.user.avatar} alt='profile' onClick={toggleDropdown} />
           ) : (
             <img className='w-[30px] h-[30px] rounded-full hover:cursor-pointer' src={defaultProfile} alt='profile' onClick={toggleDropdown} />
           )}

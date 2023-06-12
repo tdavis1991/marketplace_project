@@ -65,24 +65,20 @@ const Item = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='h-5/6 mt-10'>
+      <form onSubmit={handleSubmit} className='flex flex-col'>
         <h2>Post item for sale</h2>
         <label>
           Title:
-          <input type='text' name='title' value={formData.title} onChange={handleChange} />
-        </label>
-        <label>
-          Description:
-          <textarea name='description' value={formData.description} onChange={handleChange} />
+          <input className="input input-bordered w-full max-w-xs" type='text' name='title' value={formData.title} onChange={handleChange} />
         </label>
         <label>
           Price:
-          <input type='number' name='price' value={formData.price} onChange={handleChange} />
+          <input className="input input-bordered w-full max-w-xs" type='number' name='price' value={formData.price} onChange={handleChange} />
         </label>
         <label>
           Rating:
-          <input type='number' name='rating' value={formData.rating} onChange={handleChange} />
+          <input className="input input-bordered w-full max-w-xs" type='number' name='rating' value={formData.rating} onChange={handleChange} />
         </label>
         <select name='category' value={formData.category} onChange={handleChange}>
           <option value="">Select an option</option>
@@ -94,6 +90,10 @@ const Item = () => {
         <label>
           Photo:
           <input className="file-input file-input-bordered w-full max-w-xs" accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
+        </label>
+        <label>
+          Description:
+          <textarea className="textarea textarea-bordered textarea-lg w-full max-w-xs" name='description' value={formData.description} onChange={handleChange} />
         </label>
         <button type="submit">Post Item</button>
         {error && <div>{error}</div>}

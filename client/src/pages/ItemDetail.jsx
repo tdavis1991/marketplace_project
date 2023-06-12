@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { Loader } from '../components';
-import { rating } from '../assests';
+import { Loader, RatingStars } from '../components';
+// import { rating } from '../assests';
 
 const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -54,8 +54,9 @@ const ItemDetail = () => {
             <h2 className='font-bold'>{item?.title}</h2>
             <h3 className='text-xl'>Price: ${item?.price}.00</h3>
             <div className='flex items-center mt-3'>
-              <img src={rating} alt='rating' className='h-[50px] w-[125px]' />
-              <p>(20k reviews)</p>
+              {/* <img src={rating} alt='rating' className='h-[50px] w-[125px]' /> */}
+              <RatingStars rating={item.rating ? item.rating : 3} /> 
+              <p>(532 reviews)</p>
             </div>
             <p className='my-5'>{item?.description}</p>
             <div className='w-full flex'>

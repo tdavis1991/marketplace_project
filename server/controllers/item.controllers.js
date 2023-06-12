@@ -27,7 +27,7 @@ const getAllItems = async (req, res) => {
       color: color ? color : '',
     }
 
-    const items = await Item.find(filter);
+    const items = await Item.find();
 
     res.status(200).json(items);
   } catch (error) {
