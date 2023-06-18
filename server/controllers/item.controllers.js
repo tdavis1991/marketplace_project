@@ -49,6 +49,29 @@ const getItemDetails = async (req, res) => {
   }
 };
 
+
+// const getItemDetails = async (req, res) => {
+//   try {
+//     let { ids } = req.params; // Assuming 'ids' can be a single ID or an array of IDs
+
+//     if (!Array.isArray(ids)) {
+//       ids = [ids]; // Convert a single ID to an array with one element
+//     }
+
+//     const items = await Item.find({ _id: { $in: ids } }).populate('creator');
+
+//     if (items.length === 0) {
+//       throw new Error('Items not found');
+//     }
+
+//     res.status(200).json(items);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+
+
 const getItemCategory = async (req, res) => {
   try {
     const { id } = req.params;

@@ -37,24 +37,35 @@ const getUserInfoByID = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const userExists = await User.findOne({ _id: id }).populate('inventory');
+    const userExists = await User.findOne({ _id: id })
 
     if (!userExists) {
       throw new Error('User not found');
     }
 
-    const inventory = userExists.inventory;
-
-    const itemIds = inventory.map((item) => item._id);
-
-    const inventoryItems = await Item.find({ _id: { $in: itemIds } });
-
-    res.status(200).json({ userExists, inventoryItems });
+    res.status(200).json({ userExists });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+const getUserInventory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById({ _id: id }).populate('inventory');
+
+    const inventory = user.inventory;
+
+    const itemIds = inventory.map((item) => item._id)
+
+    const inventoryItems = await Item.find({ _id: { $in: itemIds } });
+
+    res.status(200).json({ inventoryItems })
+  } catch (error) {
+    res.status(500).json({ error: message.error })
+  }
+}
 
 // authenticate 
 const loginUser = async (req, res) => {
@@ -138,5 +149,6 @@ export {
   getUserInfoByID,
   loginUser,
   signupUser,
+  getUserInventory,
 }
 

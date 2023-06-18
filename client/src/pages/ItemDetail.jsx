@@ -27,6 +27,25 @@ const ItemDetail = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setError(null);
+
+  //   fetch(`http://localhost:8080/api/v1/items/${id}`)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch item details');
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       setItem(data);
+  //     })
+  //     .catch(error => setError(error.message))
+  //     .finally(() => setLoading(false));
+  // }, [id]);
+
   useEffect(() => {
     if (item.category) {
       setLoading(true);
@@ -42,7 +61,7 @@ const ItemDetail = () => {
     }
   }, [item.category]);
 
-  console.log(item);
+  console.log('ITEM', item);
 
   return (
     <div className='w-full my-10'>

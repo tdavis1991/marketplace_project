@@ -80,12 +80,15 @@ const Item = () => {
             <input placeholder='Rating' className="input input-bordered w-full" type='number' name='rating' value={formData.rating} onChange={handleChange} />
           </label>
         </div>
-        <select className='select select-bordered select-md w-full rounded-2xl' name='category' value={formData.category} onChange={handleChange}>
-          <option disabled selected>Category</option>
-          <option value="electronic">Electronics</option>
-          <option value="clothing">Clothing</option>
-          <option value="outdoor">Outdoor</option>
-        </select>
+        <label className='flex flex-col'>
+          Category:
+          <select className='select select-bordered select-md w-full rounded-2xl' name='category' value={formData.category} onChange={handleChange}>
+            <option disabled selected>Category</option>
+            <option value="electronic">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="outdoor">Outdoor</option>
+          </select>
+        </label>
         <label className='flex flex-col'>
           Description:
           <textarea placeholder='Description' className="textarea textarea-bordered textarea-lg w-full" name='description' value={formData.description} onChange={handleChange} />
@@ -94,7 +97,7 @@ const Item = () => {
           Photo:
           <input className="file-input file-input-bordered w-full" accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
         </label>
-        <button className='bg-quaternary w-1/2 mx-auto rounded-lg py-3' type="submit">Post Item</button>
+        <button className='bg-quaternary w-1/2 my-3 rounded-lg py-3' type="submit">Post Item</button>
         {error && <div>{error}</div>}
       </form>
     </div>
