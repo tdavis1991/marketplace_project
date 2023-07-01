@@ -19,8 +19,6 @@ const Item = () => {
 
   const { user } = useAuthContext();
 
-  // console.log('Rendering Item component with user:', user)
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -61,41 +59,45 @@ const Item = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>; // Or redirect to login page
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className='h-5/6 mt-10'>
-      <form onSubmit={handleSubmit} className='flex flex-col'>
+    <div className='h-full flex w-2/3 justify-center'>
+      <form onSubmit={handleSubmit} className='flex w-full flex-col gap-1'>
         <h2>Post item for sale</h2>
-        <label>
+        <label className='flex w-full flex-col'>
           Title:
-          <input className="input input-bordered w-full max-w-xs" type='text' name='title' value={formData.title} onChange={handleChange} />
+          <input placeholder='Title' className="input input-bordered w-full" type='text' name='title' value={formData.title} onChange={handleChange} />
         </label>
-        <label>
-          Price:
-          <input className="input input-bordered w-full max-w-xs" type='number' name='price' value={formData.price} onChange={handleChange} />
+        <div className='flex justify-between w-full'>
+          <label className='flex flex-col w-[48%]'>
+            Price:
+            <input placeholder='Price' className="input input-bordered w-full" type='number' name='price' value={formData.price} onChange={handleChange} />
+          </label>
+          <label className='flex flex-col w-[48%]'>
+            Rating:
+            <input placeholder='Rating' className="input input-bordered w-full" type='number' name='rating' value={formData.rating} onChange={handleChange} />
+          </label>
+        </div>
+        <label className='flex flex-col'>
+          Category:
+          <select className='select select-bordered select-md w-full rounded-2xl' name='category' value={formData.category} onChange={handleChange}>
+            <option disabled selected>Category</option>
+            <option value="electronic">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="outdoor">Outdoor</option>
+          </select>
         </label>
-        <label>
-          Rating:
-          <input className="input input-bordered w-full max-w-xs" type='number' name='rating' value={formData.rating} onChange={handleChange} />
-        </label>
-        <select name='category' value={formData.category} onChange={handleChange}>
-          <option value="">Select an option</option>
-          <option value="electronic">Electronics</option>
-          <option value="clothing">Clothing</option>
-          <option value="outdoor">Outdoor</option>
-        </select>
-
+        <label className='flex flex-col'>
+          Description:
+          <textarea placeholder='Description' className="textarea textarea-bordered textarea-lg w-full" name='description' value={formData.description} onChange={handleChange} />
+        </label>  
         <label>
           Photo:
-          <input className="file-input file-input-bordered w-full max-w-xs" accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
+          <input className="file-input file-input-bordered w-full" accept='image/*' type='file' onChange={(e) => handleImageChange(e.target.files[0])} />
         </label>
-        <label>
-          Description:
-          <textarea className="textarea textarea-bordered textarea-lg w-full max-w-xs" name='description' value={formData.description} onChange={handleChange} />
-        </label>
-        <button type="submit">Post Item</button>
+        <button className='bg-quaternary w-1/2 my-3 rounded-lg py-3' type="submit">Post Item</button>
         {error && <div>{error}</div>}
       </form>
     </div>

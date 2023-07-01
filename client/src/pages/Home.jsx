@@ -4,7 +4,7 @@ const Home = () => {
 
   return (
     <div>
-      <a href='/create'>ITEM</a>
+      
     </div>
   )
 }

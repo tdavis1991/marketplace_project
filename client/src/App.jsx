@@ -23,11 +23,6 @@ function App() {
           <Routes>
             <Route path='/signup' element={!token ? <Signup /> : <Navigate to='/' />} />
             <Route path='/login' element={!token ? <Login /> : <Navigate to='/' />} />
-            {token ? (
-              <Route path='/create' element={<ItemForm />} />
-            ) : (
-              <Route path='/create' element={<Navigate to='/login' />} />
-            )}
             <Route path='/profile/:id' element={token ? <Profile /> : <Navigate to='/login' />} />
             <Route path='/shop' element={<Shop />} />
             <Route path='/shop/:id' element={<ItemDetail />} />
