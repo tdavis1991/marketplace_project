@@ -51,7 +51,7 @@ const Navbar = () => {
         <p className='mr-5'>Eng &#x2193;</p>
       </div>
       <div className='flex justify-between items-center h-15 w-11/12'>
-        <Link to='/' className='ml-10'><h2><span className='text-quaternary'>F</span>rostplace</h2></Link>
+        <Link to='/' className='ml-10' style={{ fontFamily: 'Lobster, cursive' }}><h2><span className='text-quaternary'>F</span>rostplace</h2></Link>
         <div className='flex gap-10'>
           <Link to='/'>Home</Link>
           <Link to='/shop'>Shop</Link>
