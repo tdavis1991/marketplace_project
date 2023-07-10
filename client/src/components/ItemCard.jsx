@@ -7,7 +7,7 @@ import RatingStars from './Rating';
 const ItemCard = ({ title, price, category, photo, rating, id }) => {
   return (
     <Link to={`${id}`} className='w-80'>
-      <div key={id} className='w-full border rounded-xl flex flex-col items-center shadow-md min-h-[400px]'>
+      <div key={id} className='w-full border rounded-xl flex flex-col items-center shadow-md min-h-[400px] my-5'>
         <div className='relative overflow-hidden h-[200px] w-[250px] mx-auto'>
           <img className='max-w-full max-h-full mx-auto object-center' src={photo} alt={`${title}`} />
         </div>

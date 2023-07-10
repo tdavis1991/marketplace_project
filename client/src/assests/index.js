@@ -4,6 +4,9 @@ import defaultProfile from './defaultProfile.png';
 import rating from './rating.jpg';
 import phone from './phone-icon.png';
 import heroImage from './heroImage.png';
+import facebook from './facebook-icon.png';
+import instagram from './instagram-icon.png';
+import twitter from './twitter-icon.png';
 
 export {
   shoppingCart,
@@ -12,4 +15,7 @@ export {
   rating,
   phone,
   heroImage,
+  facebook,
+  twitter,
+  instagram,
 }
